@@ -25,6 +25,7 @@ HEADERS += \
     curve1D.h \
     curve2D.h \
     curve1DLinear.h \
+    curve1DStep.h \
     curve2DLinear.h \
     curve2DLinearClosed.h \
     animatedPoint.h 

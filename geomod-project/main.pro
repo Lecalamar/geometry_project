@@ -1,5 +1,5 @@
 # define your application name here 
-TARGET = yourAppName
+TARGET = CurveDraw
 
 # add your source cpp files here 
 SOURCES += \
@@ -11,6 +11,7 @@ SOURCES += \
     animationWidgetItems.cpp \
     animationWidget.cpp \
     scene.cpp \
+    curve2DBezier.cpp\
     animatedPoint.cpp 
 
 # add your header files here
@@ -25,7 +26,10 @@ HEADERS += \
     curve1D.h \
     curve2D.h \
     curve1DLinear.h \
+    curve1DStep.h \
     curve2DLinear.h \
+    curve2DLinearClosed.h \
+    curve2DBezier.h \
     animatedPoint.h 
 
 TEMPLATE = app

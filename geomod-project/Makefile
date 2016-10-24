@@ -140,6 +140,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		curve1D.h \
 		curve2D.h \
 		curve1DLinear.h \
+		curve1DStep.h \
 		curve2DLinear.h \
 		curve2DLinearClosed.h \
 		animatedPoint.h main.cpp \
@@ -318,7 +319,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainWidget.h toolsWidget.h drawingWidgetItems.h drawingWidget.h animationWidgetItems.h animationWidget.h scene.h curve1D.h curve2D.h curve1DLinear.h curve2DLinear.h curve2DLinearClosed.h animatedPoint.h $(DISTDIR)/
+	$(COPY_FILE) --parents mainWidget.h toolsWidget.h drawingWidgetItems.h drawingWidget.h animationWidgetItems.h animationWidget.h scene.h curve1D.h curve2D.h curve1DLinear.h curve1DStep.h curve2DLinear.h curve2DLinearClosed.h animatedPoint.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp mainWidget.cpp toolsWidget.cpp drawingWidgetItems.cpp drawingWidget.cpp animationWidgetItems.cpp animationWidget.cpp scene.cpp animatedPoint.cpp $(DISTDIR)/
 
 
@@ -2655,7 +2656,8 @@ scene.o: scene.cpp scene.h \
 		curve1D.h \
 		curve2DLinear.h \
 		curve2DLinearClosed.h \
-		curve1DLinear.h
+		curve1DLinear.h \
+		curve1DStep.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scene.o scene.cpp
 
 animatedPoint.o: animatedPoint.cpp animatedPoint.h \

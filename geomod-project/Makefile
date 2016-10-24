@@ -2660,6 +2660,7 @@ scene.o: scene.cpp scene.h \
 		curve1D.h \
 		curve2DLinear.h \
 		curve2DLinearClosed.h \
+		curve2DBezier.h \
 		curve1DLinear.h \
 		curve1DStep.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scene.o scene.cpp

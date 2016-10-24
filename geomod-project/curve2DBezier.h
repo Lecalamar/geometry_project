@@ -8,26 +8,23 @@ using namespace std;
 class Curve2DBezier : public Curve2D {
  private:
   Vector2f tab[RESOLUTION]; //points which will linked
-  vector<Vector2f> cpts; //control  points
  public:
  Curve2DBezier(const QString &name) : Curve2D(name) {}
  Curve2DBezier(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
    
-  Vector2f Casteljau(int k,int i,float t,float frame);
+  Vector2f Casteljau(int k,int i,float t, float frame);
   void evalCasteljau(float frame);
-  void parse(float frame);
-  void affiche();//a supprimer quand ca fonctionnera
   QPainterPath path(float frame){
     QPainterPath p;
     if(nbPts()==0) 
       return p;
-    parse(frame);
-    evalCasteljau(frame);
-    affiche();//a supprimer quand ca fonctionnera
+    tab[0]= evalAnimPt(get(0),frame);
     p.moveTo(tab[0][0],tab[0][1]);
+      evalCasteljau(frame);
     for (unsigned int i=1; i<RESOLUTION; i++){
       p.lineTo(tab[i][0],tab[i][1]);
     }
+   
     return p;
   }
 

@@ -20,8 +20,8 @@ class Curve2DBezier : public Curve2D {
       return p;
     tab[0]= evalAnimPt(get(0),frame);
     p.moveTo(tab[0][0],tab[0][1]);
-      evalCasteljau(frame);
-    for (unsigned int i=1; i<RESOLUTION; i++){
+    evalCasteljau(frame);
+    for (unsigned int i = 1; i < RESOLUTION; i++){
       p.lineTo(tab[i][0],tab[i][1]);
     }
    

@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = CurveDraw1.0.0
-DISTDIR = /home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project/.tmp/CurveDraw1.0.0
+DISTDIR = /home/_/_gindrier/geometry_project/geomod-project/.tmp/CurveDraw1.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -56,6 +56,7 @@ SOURCES       = main.cpp \
 		animationWidgetItems.cpp \
 		animationWidget.cpp \
 		scene.cpp \
+		curve2DBezier.cpp \
 		animatedPoint.cpp moc_mainWidget.cpp \
 		moc_toolsWidget.cpp \
 		moc_drawingWidget.cpp \
@@ -68,6 +69,7 @@ OBJECTS       = main.o \
 		animationWidgetItems.o \
 		animationWidget.o \
 		scene.o \
+		curve2DBezier.o \
 		animatedPoint.o \
 		moc_mainWidget.o \
 		moc_toolsWidget.o \
@@ -143,6 +145,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		curve1DStep.h \
 		curve2DLinear.h \
 		curve2DLinearClosed.h \
+		curve2DBezier.h \
 		animatedPoint.h main.cpp \
 		mainWidget.cpp \
 		toolsWidget.cpp \
@@ -151,6 +154,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		animationWidgetItems.cpp \
 		animationWidget.cpp \
 		scene.cpp \
+		curve2DBezier.cpp \
 		animatedPoint.cpp
 QMAKE_TARGET  = CurveDraw
 DESTDIR       = #avoid trailing-slash linebreak
@@ -319,9 +323,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainWidget.h toolsWidget.h drawingWidgetItems.h drawingWidget.h animationWidgetItems.h animationWidget.h scene.h curve1D.h curve2D.h curve1DLinear.h curve1DStep.h curve2DLinear.h curve2DLinearClosed.h animatedPoint.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainWidget.cpp toolsWidget.cpp drawingWidgetItems.cpp drawingWidget.cpp animationWidgetItems.cpp animationWidget.cpp scene.cpp animatedPoint.cpp $(DISTDIR)/
-
+	$(COPY_FILE) --parents mainWidget.h toolsWidget.h drawingWidgetItems.h drawingWidget.h animationWidgetItems.h animationWidget.h scene.h curve1D.h curve2D.h curve1DLinear.h curve1DStep.h curve2DLinear.h curve2DLinearClosed.h curve2DBezier.h animatedPoint.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainWidget.cpp toolsWidget.cpp drawingWidgetItems.cpp drawingWidget.cpp animationWidgetItems.cpp animationWidget.cpp scene.cpp curve2DBezier.cpp animatedPoint.cpp $(DISTDIR)/
 
 clean: compiler_clean 
 	-$(DEL_FILE) $(OBJECTS)
@@ -553,10 +556,10 @@ moc_mainWidget.cpp: toolsWidget.h \
 		curve1D.h \
 		animationWidget.h \
 		mainWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainWidget.h -o moc_mainWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_gindrier/geometry_project/geomod-project -I/home/_/_gindrier/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainWidget.h -o moc_mainWidget.cpp
 
 moc_toolsWidget.cpp: toolsWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include toolsWidget.h -o moc_toolsWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_gindrier/geometry_project/geomod-project -I/home/_/_gindrier/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include toolsWidget.h -o moc_toolsWidget.cpp
 
 moc_drawingWidget.cpp: curve2D.h \
 		eigen/Eigen/Dense \
@@ -762,7 +765,7 @@ moc_drawingWidget.cpp: curve2D.h \
 		animatedPoint.h \
 		curve1D.h \
 		drawingWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include drawingWidget.h -o moc_drawingWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_gindrier/geometry_project/geomod-project -I/home/_/_gindrier/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include drawingWidget.h -o moc_drawingWidget.cpp
 
 moc_animationWidget.cpp: animatedPoint.h \
 		eigen/Eigen/Dense \
@@ -967,7 +970,7 @@ moc_animationWidget.cpp: animatedPoint.h \
 		eigen/Eigen/src/StlSupport/StdVector.h \
 		eigen/Eigen/src/StlSupport/details.h \
 		animationWidget.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project -I/home/_/_camargo_rivera/GeometricModelling/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include animationWidget.h -o moc_animationWidget.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/_/_gindrier/geometry_project/geomod-project -I/home/_/_gindrier/geometry_project/geomod-project/eigen -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include animationWidget.h -o moc_animationWidget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -2656,9 +2659,216 @@ scene.o: scene.cpp scene.h \
 		curve1D.h \
 		curve2DLinear.h \
 		curve2DLinearClosed.h \
+		curve2DBezier.h \
 		curve1DLinear.h \
 		curve1DStep.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scene.o scene.cpp
+
+curve2DBezier.o: curve2DBezier.cpp curve2D.h \
+		eigen/Eigen/Dense \
+		eigen/Eigen/Core \
+		eigen/Eigen/src/Core/util/DisableStupidWarnings.h \
+		eigen/Eigen/src/Core/util/Macros.h \
+		eigen/Eigen/src/Core/util/MKL_support.h \
+		eigen/Eigen/src/Core/util/Constants.h \
+		eigen/Eigen/src/Core/util/ForwardDeclarations.h \
+		eigen/Eigen/src/Core/util/Meta.h \
+		eigen/Eigen/src/Core/util/StaticAssert.h \
+		eigen/Eigen/src/Core/util/XprHelper.h \
+		eigen/Eigen/src/Core/util/Memory.h \
+		eigen/Eigen/src/Core/NumTraits.h \
+		eigen/Eigen/src/Core/MathFunctions.h \
+		eigen/Eigen/src/Core/GenericPacketMath.h \
+		eigen/Eigen/src/Core/arch/SSE/PacketMath.h \
+		eigen/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		eigen/Eigen/src/Core/arch/SSE/Complex.h \
+		eigen/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		eigen/Eigen/src/Core/arch/AltiVec/Complex.h \
+		eigen/Eigen/src/Core/arch/NEON/PacketMath.h \
+		eigen/Eigen/src/Core/arch/NEON/Complex.h \
+		eigen/Eigen/src/Core/arch/Default/Settings.h \
+		eigen/Eigen/src/Core/Functors.h \
+		eigen/Eigen/src/Core/DenseCoeffsBase.h \
+		eigen/Eigen/src/Core/DenseBase.h \
+		eigen/Eigen/src/plugins/BlockMethods.h \
+		eigen/Eigen/src/Core/MatrixBase.h \
+		eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		eigen/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		eigen/Eigen/src/Core/EigenBase.h \
+		eigen/Eigen/src/Core/Assign.h \
+		eigen/Eigen/src/Core/util/BlasUtil.h \
+		eigen/Eigen/src/Core/DenseStorage.h \
+		eigen/Eigen/src/Core/NestByValue.h \
+		eigen/Eigen/src/Core/ForceAlignedAccess.h \
+		eigen/Eigen/src/Core/ReturnByValue.h \
+		eigen/Eigen/src/Core/NoAlias.h \
+		eigen/Eigen/src/Core/PlainObjectBase.h \
+		eigen/Eigen/src/Core/Matrix.h \
+		eigen/Eigen/src/Core/Array.h \
+		eigen/Eigen/src/Core/CwiseBinaryOp.h \
+		eigen/Eigen/src/Core/CwiseUnaryOp.h \
+		eigen/Eigen/src/Core/CwiseNullaryOp.h \
+		eigen/Eigen/src/Core/CwiseUnaryView.h \
+		eigen/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		eigen/Eigen/src/Core/Dot.h \
+		eigen/Eigen/src/Core/StableNorm.h \
+		eigen/Eigen/src/Core/MapBase.h \
+		eigen/Eigen/src/Core/Stride.h \
+		eigen/Eigen/src/Core/Map.h \
+		eigen/Eigen/src/Core/Block.h \
+		eigen/Eigen/src/Core/VectorBlock.h \
+		eigen/Eigen/src/Core/Ref.h \
+		eigen/Eigen/src/Core/Transpose.h \
+		eigen/Eigen/src/Core/DiagonalMatrix.h \
+		eigen/Eigen/src/Core/Diagonal.h \
+		eigen/Eigen/src/Core/DiagonalProduct.h \
+		eigen/Eigen/src/Core/PermutationMatrix.h \
+		eigen/Eigen/src/Core/Transpositions.h \
+		eigen/Eigen/src/Core/Redux.h \
+		eigen/Eigen/src/Core/Visitor.h \
+		eigen/Eigen/src/Core/Fuzzy.h \
+		eigen/Eigen/src/Core/IO.h \
+		eigen/Eigen/src/Core/Swap.h \
+		eigen/Eigen/src/Core/CommaInitializer.h \
+		eigen/Eigen/src/Core/Flagged.h \
+		eigen/Eigen/src/Core/ProductBase.h \
+		eigen/Eigen/src/Core/GeneralProduct.h \
+		eigen/Eigen/src/Core/TriangularMatrix.h \
+		eigen/Eigen/src/Core/SelfAdjointView.h \
+		eigen/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		eigen/Eigen/src/Core/products/Parallelizer.h \
+		eigen/Eigen/src/Core/products/CoeffBasedProduct.h \
+		eigen/Eigen/src/Core/products/GeneralMatrixVector.h \
+		eigen/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		eigen/Eigen/src/Core/SolveTriangular.h \
+		eigen/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		eigen/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		eigen/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		eigen/Eigen/src/Core/products/SelfadjointProduct.h \
+		eigen/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		eigen/Eigen/src/Core/products/TriangularMatrixVector.h \
+		eigen/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		eigen/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		eigen/Eigen/src/Core/products/TriangularSolverVector.h \
+		eigen/Eigen/src/Core/BandMatrix.h \
+		eigen/Eigen/src/Core/CoreIterators.h \
+		eigen/Eigen/src/Core/BooleanRedux.h \
+		eigen/Eigen/src/Core/Select.h \
+		eigen/Eigen/src/Core/VectorwiseOp.h \
+		eigen/Eigen/src/Core/Random.h \
+		eigen/Eigen/src/Core/Replicate.h \
+		eigen/Eigen/src/Core/Reverse.h \
+		eigen/Eigen/src/Core/ArrayBase.h \
+		eigen/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		eigen/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		eigen/Eigen/src/Core/ArrayWrapper.h \
+		eigen/Eigen/src/Core/products/GeneralMatrixMatrix_MKL.h \
+		eigen/Eigen/src/Core/products/GeneralMatrixVector_MKL.h \
+		eigen/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_MKL.h \
+		eigen/Eigen/src/Core/products/SelfadjointMatrixMatrix_MKL.h \
+		eigen/Eigen/src/Core/products/SelfadjointMatrixVector_MKL.h \
+		eigen/Eigen/src/Core/products/TriangularMatrixMatrix_MKL.h \
+		eigen/Eigen/src/Core/products/TriangularMatrixVector_MKL.h \
+		eigen/Eigen/src/Core/products/TriangularSolverMatrix_MKL.h \
+		eigen/Eigen/src/Core/Assign_MKL.h \
+		eigen/Eigen/src/Core/GlobalFunctions.h \
+		eigen/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		eigen/Eigen/Eigen2Support \
+		eigen/Eigen/src/Eigen2Support/Macros.h \
+		eigen/Eigen/src/Eigen2Support/Memory.h \
+		eigen/Eigen/src/Eigen2Support/Meta.h \
+		eigen/Eigen/src/Eigen2Support/Lazy.h \
+		eigen/Eigen/src/Eigen2Support/Cwise.h \
+		eigen/Eigen/src/Eigen2Support/CwiseOperators.h \
+		eigen/Eigen/src/Eigen2Support/TriangularSolver.h \
+		eigen/Eigen/src/Eigen2Support/Block.h \
+		eigen/Eigen/src/Eigen2Support/VectorBlock.h \
+		eigen/Eigen/src/Eigen2Support/Minor.h \
+		eigen/Eigen/src/Eigen2Support/MathFunctions.h \
+		eigen/Eigen/LU \
+		eigen/Eigen/src/misc/Solve.h \
+		eigen/Eigen/src/misc/Kernel.h \
+		eigen/Eigen/src/misc/Image.h \
+		eigen/Eigen/src/LU/FullPivLU.h \
+		eigen/Eigen/src/LU/PartialPivLU.h \
+		eigen/Eigen/src/LU/PartialPivLU_MKL.h \
+		eigen/Eigen/src/LU/Determinant.h \
+		eigen/Eigen/src/LU/Inverse.h \
+		eigen/Eigen/src/LU/arch/Inverse_SSE.h \
+		eigen/Eigen/src/Eigen2Support/LU.h \
+		eigen/Eigen/Cholesky \
+		eigen/Eigen/src/Cholesky/LLT.h \
+		eigen/Eigen/src/Cholesky/LDLT.h \
+		eigen/Eigen/src/Cholesky/LLT_MKL.h \
+		eigen/Eigen/QR \
+		eigen/Eigen/Jacobi \
+		eigen/Eigen/src/Jacobi/Jacobi.h \
+		eigen/Eigen/Householder \
+		eigen/Eigen/src/Householder/Householder.h \
+		eigen/Eigen/src/Householder/HouseholderSequence.h \
+		eigen/Eigen/src/Householder/BlockHouseholder.h \
+		eigen/Eigen/src/QR/HouseholderQR.h \
+		eigen/Eigen/src/QR/FullPivHouseholderQR.h \
+		eigen/Eigen/src/QR/ColPivHouseholderQR.h \
+		eigen/Eigen/src/QR/HouseholderQR_MKL.h \
+		eigen/Eigen/src/QR/ColPivHouseholderQR_MKL.h \
+		eigen/Eigen/src/Eigen2Support/QR.h \
+		eigen/Eigen/Eigenvalues \
+		eigen/Eigen/Geometry \
+		eigen/Eigen/SVD \
+		eigen/Eigen/src/SVD/JacobiSVD.h \
+		eigen/Eigen/src/SVD/JacobiSVD_MKL.h \
+		eigen/Eigen/src/SVD/UpperBidiagonalization.h \
+		eigen/Eigen/src/Eigen2Support/SVD.h \
+		eigen/Eigen/src/Geometry/OrthoMethods.h \
+		eigen/Eigen/src/Geometry/EulerAngles.h \
+		eigen/Eigen/src/Geometry/Homogeneous.h \
+		eigen/Eigen/src/Geometry/RotationBase.h \
+		eigen/Eigen/src/Geometry/Rotation2D.h \
+		eigen/Eigen/src/Geometry/Quaternion.h \
+		eigen/Eigen/src/Geometry/AngleAxis.h \
+		eigen/Eigen/src/Geometry/Transform.h \
+		eigen/Eigen/src/Geometry/Translation.h \
+		eigen/Eigen/src/Geometry/Scaling.h \
+		eigen/Eigen/src/Geometry/Hyperplane.h \
+		eigen/Eigen/src/Geometry/ParametrizedLine.h \
+		eigen/Eigen/src/Geometry/AlignedBox.h \
+		eigen/Eigen/src/Geometry/Umeyama.h \
+		eigen/Eigen/src/Geometry/arch/Geometry_SSE.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/All.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/RotationBase.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/Rotation2D.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/Quaternion.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/AngleAxis.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/Transform.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/Translation.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/Scaling.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/AlignedBox.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/Hyperplane.h \
+		eigen/Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h \
+		eigen/Eigen/src/Eigenvalues/Tridiagonalization.h \
+		eigen/Eigen/src/Eigenvalues/RealSchur.h \
+		eigen/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
+		eigen/Eigen/src/Eigenvalues/EigenSolver.h \
+		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
+		eigen/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
+		eigen/Eigen/src/Eigenvalues/ComplexSchur.h \
+		eigen/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
+		eigen/Eigen/src/Eigenvalues/RealQZ.h \
+		eigen/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
+		eigen/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+		eigen/Eigen/src/Eigenvalues/RealSchur_MKL.h \
+		eigen/Eigen/src/Eigenvalues/ComplexSchur_MKL.h \
+		eigen/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_MKL.h \
+		eigen/Eigen/StdVector \
+		eigen/Eigen/src/StlSupport/StdVector.h \
+		eigen/Eigen/src/StlSupport/details.h \
+		animatedPoint.h \
+		curve1D.h \
+		curve2DBezier.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o curve2DBezier.o curve2DBezier.cpp
 
 animatedPoint.o: animatedPoint.cpp animatedPoint.h \
 		eigen/Eigen/Dense \

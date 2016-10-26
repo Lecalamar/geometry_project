@@ -3,10 +3,10 @@
 // add all your types of 2D curves here 
 #include "curve2DLinear.h"
 #include "curve2DLinearClosed.h"
+#include "curve2DBezier.h"
 
 #include "curve1DLinear.h"
 #include "curve1DStep.h"
-
 Scene *Scene::_instance = NULL;
 
 using namespace std;
@@ -15,6 +15,7 @@ using namespace std;
 void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DLinearConstructor());
   addCurveBuilder(new Curve2DLinearClosedConstructor());
+  addCurveBuilder(new Curve2DBezierConstructor());
 }
 
 // add 1D curve builders (functions) here

@@ -11,8 +11,8 @@ SOURCES += \
     animationWidgetItems.cpp \
     animationWidget.cpp \
     scene.cpp \
+    animatedPoint.cpp \
     curve2DBezier.cpp\
-    animatedPoint.cpp 
 
 # add your header files here
 HEADERS += \

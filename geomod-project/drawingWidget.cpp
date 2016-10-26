@@ -133,6 +133,12 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
       case Scene::EDIT_DEL_PT:
 	deleteSelectedPoint();
 	break;
+      case Scene::EDIT_DEL_CURVE:
+	deleteCurve();
+	break;
+      case Scene::EDIT_DEL_ALL: /*DELETE ALL POINTS*/
+	deleteAllPoints();
+	break;
       default: break;
       }
     }
@@ -297,6 +303,25 @@ void DrawingWidget::deleteSelectedPoint() {
   }
   selectionChanged();
 }
+
+/*DELETE SELECTED CURVE*/
+void DrawingWidget::deleteCurve() {
+  Scene *sce = Scene::get();
+  int curveInd = sce->selectedCurve();
+
+  if(curveInd<0) return;
+
+  deleteSelectedCurve();
+  selectionChanged();
+}
+
+
+/*DELETE ALL POINTS*/
+void DrawingWidget::deleteAllPoints() { 
+  /*  Scene *sce = Scene::get();
+      sce->clean(); */
+}
+
 
 void DrawingWidget::frameChanged() {
   Scene *sce = Scene::get();

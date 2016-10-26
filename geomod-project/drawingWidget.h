@@ -45,6 +45,8 @@ class DrawingWidget : public QGraphicsView {
   void addPointBeforeSelectedPoint(float x,float y);
   void addPointAfterSelectedPoint(float x,float y);
   void deleteSelectedPoint();
+  void deleteCurve(); /*DELETE SELECTED CURVE*/
+  void deleteAllPoints(); /*DELETE ALL POINTS*/
   
   std::vector<std::vector<ControlPoint2D *> > _points;
   std::vector<Curve2DDrawer *>                _curves;

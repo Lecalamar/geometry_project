@@ -11,9 +11,10 @@ SOURCES += \
     animationWidgetItems.cpp \
     animationWidget.cpp \
     scene.cpp \
+    animatedPoint.cpp \
     curve2DBezier.cpp\
-    curve2DBezierClosed.cpp\
-    animatedPoint.cpp 
+    curve2DAitken.cpp\
+    curve2DBezierClosed.cpp
 
 # add your header files here
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     curve2DLinearClosed.h \
     curve2DBezier.h \
     curve2DBezierClosed.h \
+    curve2DAitken.h \
     animatedPoint.h 
 
 TEMPLATE = app

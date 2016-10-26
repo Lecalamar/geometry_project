@@ -41,6 +41,8 @@ class ToolsWidget : public QWidget {
     void addPtBeforeClicked();
     void addPtAfterClicked();
     void delPtClicked();
+    void delCurveClicked(); /*DELETE SELECTED CURVES*/
+    void delAllPts(); /*DELLETE ALL POINTS*/
     void sizeChanged();
     void nbFramesChanged(int);
     void fpsChanged(int);
@@ -90,6 +92,8 @@ class ToolsWidget : public QWidget {
   QPushButton *_addPtBefore;
   QPushButton *_addPtAfter;
   QPushButton *_delPt;
+  QPushButton *_delCurve; /*DELETE SELECTED CURVE*/
+  QPushButton *_delAllPt; /*DELETE ALL POINTS*/
 
   QPushButton *_kfModePt;
   QPushButton *_kfModeCurve;

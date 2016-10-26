@@ -75,9 +75,19 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   hl->addWidget(_editButton);
   _curveTypes = new QComboBox();
   _curveTypes->addItems(ct);
+  label = new QLabel("Parametrization:"); /*PARAMETRIZATION OPTION*/
+  _uniform = new QPushButton("Uniform");
+  _uniform->setAutoFillBackground(true);
+  _chordal = new QPushButton("Chordal");
+  _chordal->setAutoFillBackground(true);
+  hl_2 = new QHBoxLayout();
+  hl_2->addWidget(label);
+  hl_2->addWidget(_uniform);
+  hl_2->addWidget(_chordal);
   vl = new QVBoxLayout();
   vl->addItem(hl);
   vl->addWidget(_curveTypes);
+  vl->addItem(hl_2);
   _toolBox->setLayout(vl);
   l->addWidget(_toolBox);
 
@@ -101,15 +111,8 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   hl->addWidget(_delPt);
   //  hl->addWidget(_delAllPt); /*DELETE ALL POINTS*/
   hl->addWidget(_delCurve); /*DELETE SELECTED CURVE*/
-  label = new QLabel("Parametrization:"); /*PARAMETRIZATION BOX*/
-  _uniform = new QPushButton("Uniform");
-  _uniform->setAutoFillBackground(true);
-  hl_2 = new QHBoxLayout();
-  hl_2->addWidget(label);
-  hl_2->addWidget(_uniform);
   vl = new QVBoxLayout();
   vl->addItem(hl);
-  vl->addItem(hl_2);
   _editBox->setLayout(vl);
   l->addWidget(_editBox);
 

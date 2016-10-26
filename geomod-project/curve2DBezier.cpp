@@ -26,8 +26,8 @@ Vector2f Curve2DBezier::Casteljau(int k,int i,float t, float frame){
 }
 
 void Curve2DBezier::evalCasteljau(float frame){
-  for (int t = 1; t < RESOLUTION; t++){
-    tab[t] = Casteljau(nbPts()-1, 0, (float)t/RESOLUTION, frame);
+  for (int t = 1; t < RESOLUTION_B; t++){
+    tab[t] = Casteljau(nbPts()-1, 0, (float)t/RESOLUTION_B, frame);
   }
 }
 

@@ -22,7 +22,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   QStringList ct = sce->curveTypes();
   QStringList cf = sce->functionTypes();
   
-  QHBoxLayout *hl;
+  QHBoxLayout *hl, *hl_2;
   QVBoxLayout *vl;
   QLabel *label;
   QVBoxLayout *l = new QVBoxLayout();
@@ -101,8 +101,15 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   hl->addWidget(_delPt);
   //  hl->addWidget(_delAllPt); /*DELETE ALL POINTS*/
   hl->addWidget(_delCurve); /*DELETE SELECTED CURVE*/
+  label = new QLabel("Parametrization:"); /*PARAMETRIZATION BOX*/
+  _uniform = new QPushButton("Uniform");
+  _uniform->setAutoFillBackground(true);
+  hl_2 = new QHBoxLayout();
+  hl_2->addWidget(label);
+  hl_2->addWidget(_uniform);
   vl = new QVBoxLayout();
   vl->addItem(hl);
+  vl->addItem(hl_2);
   _editBox->setLayout(vl);
   l->addWidget(_editBox);
 

@@ -95,6 +95,8 @@ class ToolsWidget : public QWidget {
   QPushButton *_delCurve; /*DELETE SELECTED CURVE*/
   QPushButton *_delAllPt; /*DELETE ALL POINTS*/
 
+  QPushButton *_uniform; /*UNIFORM PARAMETRIZATION*/
+
   QPushButton *_kfModePt;
   QPushButton *_kfModeCurve;
   QPushButton *_kfModeScene;

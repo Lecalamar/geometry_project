@@ -22,7 +22,7 @@ Vector2f Curve2DBezierClosed::CasteljauClosed(int k,int i,float t, float frame){
 
 void Curve2DBezierClosed::evalCasteljauClosed(float frame){
   for (int t = 1; t < RESOLUTION_BC; t++){
-    tab[t] = CasteljauClosed(nbPts(), 0, (float)t/RESOLUTION_BC, frame);
+    tab[t] = CasteljauClosed(nbPts(), 0, (float)t/(RESOLUTION_BC-1), frame);
   }
 }
 

@@ -21,7 +21,7 @@ Vector2f Curve2DAitken::Aitken(int k,int i,float t, float frame){
 
 void Curve2DAitken::evalAitken(float frame){
   for (int t = 1; t < RESOLUTION_A; t++){
-    tab[t] = Aitken(nbPts()-1, 0, (float)t/RESOLUTION_A, frame);
+    tab[t] = Aitken(nbPts()-1, 0, (float)t/(RESOLUTION_A-1), frame);
   }
 }
 

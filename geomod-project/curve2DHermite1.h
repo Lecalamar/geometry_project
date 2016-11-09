@@ -13,6 +13,8 @@ class Curve2DHermite1 : public Curve2D {
  Curve2DHermite1(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
 
   vector<float> H(float t);
+  float distance(Vector2f P1,Vector2f P2);
+  float projection(Vector2f P1,Vector2f P2, Vector2f P3);
   Vector2f coeff(float t, int i, float frame);
   void evalHermite1(int i,float frame);
   QPainterPath path(float frame){

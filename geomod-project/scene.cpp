@@ -4,7 +4,7 @@
 #include "curve2DLinear.h"
 #include "curve2DLinearClosed.h"
 #include "curve2DBezier.h"
-#include "curve2DBezierClosed.h"
+//#include "curve2DBezierClosed.h"
 #include "curve2DAitken.h"
 #include "curve2DHermite1.h"
 
@@ -19,7 +19,7 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DLinearConstructor());
   addCurveBuilder(new Curve2DLinearClosedConstructor());
   addCurveBuilder(new Curve2DBezierConstructor());
-  addCurveBuilder(new Curve2DBezierClosedConstructor());
+  //addCurveBuilder(new Curve2DBezierClosedConstructor());
   addCurveBuilder(new Curve2DAitkenConstructor());
   addCurveBuilder(new Curve2DHermite1Constructor());
 }

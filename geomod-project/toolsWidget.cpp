@@ -81,9 +81,9 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   _chordal = new QPushButton("Chordal");
   _chordal->setAutoFillBackground(true);
   hl_2 = new QHBoxLayout();
-  hl_2->addWidget(label);
-  hl_2->addWidget(_uniform);
-  hl_2->addWidget(_chordal);
+  //hl_2->addWidget(label);
+  //hl_2->addWidget(_uniform);
+  //hl_2->addWidget(_chordal);
   vl = new QVBoxLayout();
   vl->addItem(hl);
   vl->addWidget(_curveTypes);
@@ -109,7 +109,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   hl->addWidget(_addPtBefore);
   hl->addWidget(_addPtAfter);
   hl->addWidget(_delPt);
-  //  hl->addWidget(_delAllPt); /*DELETE ALL POINTS*/
+  //hl->addWidget(_delAllPt); /*DELETE ALL POINTS*/
   hl->addWidget(_delCurve); /*DELETE SELECTED CURVE*/
   vl = new QVBoxLayout();
   vl->addItem(hl);

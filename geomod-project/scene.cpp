@@ -6,6 +6,7 @@
 #include "curve2DBezier.h"
 #include "curve2DBezierClosed.h"
 #include "curve2DAitken.h"
+#include "curve2DAitkenChordal.h"
 //#include "curve2DHermite1.h"
 
 #include "curve1DLinear.h"
@@ -21,6 +22,7 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DBezierConstructor());
   addCurveBuilder(new Curve2DBezierClosedConstructor());
   addCurveBuilder(new Curve2DAitkenConstructor());
+  addCurveBuilder(new Curve2DAitkenChordalConstructor());
   //  addCurveBuilder(new Curve2DHermite1Constructor());
 }
 

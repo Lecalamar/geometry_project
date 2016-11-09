@@ -14,7 +14,9 @@ SOURCES += \
     animatedPoint.cpp \
     curve2DBezier.cpp\
     curve2DAitken.cpp\
-    curve2DBezierClosed.cpp
+    curve2DAitkenChordal.cpp\
+    curve2DBezierClosed.cpp\
+    parametrization.cpp
 
 # add your header files here
 HEADERS += \
@@ -34,7 +36,9 @@ HEADERS += \
     curve2DBezier.h \
     curve2DBezierClosed.h \
     curve2DAitken.h \
-    animatedPoint.h 
+    curve2DAitkenChordal.h\
+    animatedPoint.h\
+    parametrization.h
 
 TEMPLATE = app
 

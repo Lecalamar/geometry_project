@@ -14,6 +14,7 @@
 class Scene {
  public:
   enum { CREATE_CURVE=0, EDIT_CURVE=1 };
+  enum { NO_PARAM=0, UNIFORM_PARAM=1, CHORDAL_PARAM=2, CENTRIPETAL_PARAM=3 }; /*PARAMETRIZATION*/
   enum { EDIT_ADD_BEFORE=0, EDIT_ADD_AFTER=1, EDIT_DEL_PT=2 , EDIT_DEL_ALL=3, EDIT_DEL_CURVE=4};
   enum { KF_MODE_PT=0, KF_MODE_CURVE=1,KF_MODE_SCENE=2 };
 
@@ -286,6 +287,7 @@ class Scene {
     _width = 800;
     _height = 600;
     _currentTool = CREATE_CURVE;
+    _currentParam = NO_PARAM; /*PARAMETRIZATION CHOICE*/
     _currentCurveType = _curveBuilders.begin()->first;
     _currentKfType = _functionBuilders.begin()->first;
     _selectedCurve = -1;
@@ -381,6 +383,10 @@ class Scene {
   
   inline int currentTool() const {
     return _currentTool;
+  }
+
+  inline int currentParam() const { /*PARAMETRIZATION*/
+    return _currentParam;
   }
 
   inline void setCurrentTool(int t) {
@@ -528,6 +534,7 @@ class Scene {
   // selection, user settings
   QString _currentCurveType;
   int _currentTool;
+  int _currentParam;  /*PARAMETRIZATION*/
   int _editMode;
   int _selectedCurve;
   std::vector<int> _selectedPoints;
@@ -536,6 +543,8 @@ class Scene {
   QColor _currentPenColor;
   QColor _currentBrushColor;
   int    _currentPenWidth;
+
+  
 };
 
 #endif // SCENE_H

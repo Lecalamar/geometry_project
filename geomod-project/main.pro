@@ -16,6 +16,8 @@ SOURCES += \
     curve2DAitken.cpp\
     curve2DHermite1.cpp\
     curve2DHermiteClosed.cpp\
+    curve2DWheel.cpp\
+    curve2DCircle.cpp\
     curve2DBezierClosed.cpp
 
 # add your header files here
@@ -38,6 +40,7 @@ HEADERS += \
     curve2DAitken.h \
     curve2DHermite1.h \
     curve2DHermiteClosed.h \
+    curve2DWheel.h\
     animatedPoint.h 
 
 TEMPLATE = app

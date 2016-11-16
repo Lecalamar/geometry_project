@@ -27,6 +27,7 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DHermite1Constructor());
   addCurveBuilder(new Curve2DHermiteClosedConstructor());
   addCurveBuilder(new Curve2DWheelConstructor());
+  addCurveBuilder(new Curve2DCircleConstructor());
 }
 
 // add 1D curve builders (functions) here

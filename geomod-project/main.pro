@@ -41,6 +41,7 @@ HEADERS += \
     curve2DHermite1.h \
     curve2DHermiteClosed.h \
     curve2DWheel.h\
+    curve2DCircle.h\
     animatedPoint.h 
 
 TEMPLATE = app

@@ -5,6 +5,7 @@
 #include "curve2D.h"
 #include <vector>
 using namespace std;
+
 class Curve2DAitken : public Curve2D {
  private:
   Vector2f tab[RESOLUTION_A]; //points which will linked
@@ -12,8 +13,9 @@ class Curve2DAitken : public Curve2D {
  Curve2DAitken(const QString &name) : Curve2D(name) {}
  Curve2DAitken(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
    
-  Vector2f Aitken(int k,int i,float t, float frame);
+  Vector2f Aitken(int k,int i,float t, float frame, float *param);
   void evalAitken(float frame);
+  
   QPainterPath path(float frame){
     QPainterPath p;
     if(nbPts()==0) 

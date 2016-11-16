@@ -10,9 +10,14 @@
 #include "curve2DHermiteClosed.h"
 #include "curve2DWheel.h"
 #include "curve2DCircle.h"
+#include "curve2DLagrange.h"
+#include "curve2DSquare.h"
+#include "curve2DAitkenChordal.h"
+#include "curve2DAitkenCentripetal.h"
 
 #include "curve1DLinear.h"
 #include "curve1DStep.h"
+#include "curve1DSinus.h"
 Scene *Scene::_instance = NULL;
 
 using namespace std;
@@ -28,12 +33,17 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DHermiteClosedConstructor());
   addCurveBuilder(new Curve2DWheelConstructor());
   addCurveBuilder(new Curve2DCircleConstructor());
+  addCurveBuilder(new Curve2DLagrangeConstructor());
+  addCurveBuilder(new Curve2DSquareConstructor());
+  addCurveBuilder(new Curve2DAitkenChordalConstructor());
+  addCurveBuilder(new Curve2DAitkenCentripetalConstructor());
 }
 
 // add 1D curve builders (functions) here
 void Scene::initFunctionBuilders() {
   addFunctionBuilder(new Curve1DLinearConstructor());
   addFunctionBuilder(new Curve1DStepConstructor());
+  addFunctionBuilder(new Curve1DSinusConstructor());
 }
 
 

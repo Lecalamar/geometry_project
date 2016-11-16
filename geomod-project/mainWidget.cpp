@@ -14,7 +14,7 @@ using namespace std;
 
 const QString MainWindow::_DEFAULT_FILE_NAME = "untitled";
 const QString MainWindow::_APPLICATION_NAME = "CurveDraw";
-const QString MainWindow::_APPLICATION_EXTENSION = ".yan";
+const QString MainWindow::_APPLICATION_EXTENSION = ".cd";
 QDir MainWindow::_CURRENT_PATH = QDir::currentPath();
 
 MainWindow::MainWindow()

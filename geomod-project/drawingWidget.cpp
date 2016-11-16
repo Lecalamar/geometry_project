@@ -320,7 +320,8 @@ void DrawingWidget::deleteCurve() {
 void DrawingWidget::deleteAllPoints() { 
   /*  Scene *sce = Scene::get();
   sce->clean();
-  selectionChanged(); */
+  selectionChanged();
+  */
 }
 
 

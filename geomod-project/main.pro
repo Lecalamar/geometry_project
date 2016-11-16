@@ -12,14 +12,19 @@ SOURCES += \
     animationWidget.cpp \
     scene.cpp \
     animatedPoint.cpp \
-    curve2DBezier.cpp\
-    curve2DAitken.cpp\
+    parametrization.cpp \
+    curve2DBezier.cpp \
+    curve2DAitken.cpp \
     curve2DHermite1.cpp\
     curve2DHermiteClosed.cpp\
     curve2DBezierClosed.cpp \
     curve2DLagrange.cpp \
     curve2DSquare.cpp \
-    Matrice.cpp
+    Matrice.cpp \
+    curve2DHermiteClosed.cpp \
+    curve2DBezierClosed.cpp \
+    curve2DAitkenChordal.cpp \
+    curve2DAitkenCentripetal.cpp
 
 # add your header files here
 HEADERS += \
@@ -30,6 +35,8 @@ HEADERS += \
     animationWidgetItems.h \
     animationWidget.h \
     scene.h \
+    animatedPoint.h \
+    parametrization.h \
     curve1D.h \
     curve2D.h \
     curve1DLinear.h \
@@ -44,8 +51,10 @@ HEADERS += \
     animatedPoint.h \
     curve2DLagrange.h \
     curve1DSinus.h \
-    curve2Square.h \
+    curve2DSquare.h \
     Matrice.h \
+    curve2DAitkenChordal.h \
+    curve2DAitkenCentripetal.h 
 
 TEMPLATE = app
 

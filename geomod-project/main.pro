@@ -17,14 +17,14 @@ SOURCES += \
     curve2DAitken.cpp \
     curve2DHermite1.cpp\
     curve2DHermiteClosed.cpp\
-    curve2DWheel.cpp\
-    curve2DCircle.cpp\
-    curve2DBezierClosed.cpp
+    curve2DBezierClosed.cpp \
     curve2DLagrange.cpp \
     curve2DSquare.cpp \
     Matrice.cpp \
     curve2DAitkenChordal.cpp \
-    curve2DAitkenCentripetal.cpp
+    curve2DAitkenCentripetal.cpp \
+    curve2DWheel.cpp \
+    curve2DCircle.cpp
 
 # add your header files here
 HEADERS += \
@@ -44,18 +44,19 @@ HEADERS += \
     curve2DLinear.h \
     curve2DLinearClosed.h \
     curve2DBezier.h \
+    curve2DBezierClosed.h \
     curve2DAitken.h \
     curve2DHermite1.h \
     curve2DHermiteClosed.h \
-    curve2DWheel.h\
-    curve2DCircle.h\
     animatedPoint.h \
     curve2DLagrange.h \
     curve1DSinus.h \
     curve2DSquare.h \
     Matrice.h \
     curve2DAitkenChordal.h \
-    curve2DAitkenCentripetal.h 
+    curve2DAitkenCentripetal.h \
+    curve2DWheel.h \
+    curve2DCircle.h
 
 TEMPLATE = app
 

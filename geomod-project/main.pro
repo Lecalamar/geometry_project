@@ -21,8 +21,6 @@ SOURCES += \
     curve2DLagrange.cpp \
     curve2DSquare.cpp \
     Matrice.cpp \
-    curve2DHermiteClosed.cpp \
-    curve2DBezierClosed.cpp \
     curve2DAitkenChordal.cpp \
     curve2DAitkenCentripetal.cpp
 

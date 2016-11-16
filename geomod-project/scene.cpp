@@ -27,12 +27,13 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DBezierConstructor());
   //addCurveBuilder(new Curve2DBezierClosedConstructor());
   addCurveBuilder(new Curve2DAitkenConstructor());
+  addCurveBuilder(new Curve2DAitkenChordalConstructor());
+  addCurveBuilder(new Curve2DAitkenCentripetalConstructor());
   addCurveBuilder(new Curve2DHermite1Constructor());
   addCurveBuilder(new Curve2DHermiteClosedConstructor());
   addCurveBuilder(new Curve2DLagrangeConstructor());
   addCurveBuilder(new Curve2DSquareConstructor());
-  addCurveBuilder(new Curve2DAitkenChordalConstructor());
-  addCurveBuilder(new Curve2DAitkenCentripetalConstructor());
+
 }
 
 // add 1D curve builders (functions) here

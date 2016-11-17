@@ -2673,7 +2673,6 @@ scene.o: scene.cpp scene.h \
 		curve1DSinus.h \
 		curve2DLagrange.h \
 		curve2DSquare.h \
-		Matrice.h \
 		curve2DAitkenChordal.h \
 		curve2DAitkenCentripetal.h \
 		curve1DLinear.h \
@@ -4531,7 +4530,6 @@ curve2DSquare.o: curve2DSquare.cpp curve2D.h \
 		eigen/Eigen/src/StlSupport/details.h \
 		animatedPoint.h \
 		curve1D.h \
-		Matrice.h \
 		curve2DSquare.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o curve2DSquare.o curve2DSquare.cpp
 

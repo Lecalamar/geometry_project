@@ -1,9 +1,9 @@
 #ifndef CURVE_2D_SQUARE_H
 #define CURVE_2D_SQUARE_H
 
-#define RESOLUTION_SQUARE 1000
+#define RESOLUTION_SQUARE 10000
 #include "curve2D.h"
-#include "Matrice.h"
+#include "eigen/Eigen/src/Core/Matrix.h"
 #include <vector>
 using namespace std;
 #include <iostream>
@@ -13,7 +13,7 @@ class Curve2DSquare : public Curve2D {
 	public:
 	Curve2DSquare(const QString &name) : Curve2D(name) {}
 	Curve2DSquare(Curve2D *curve,const QString &name) : Curve2D(curve,name) {}
-	float polyVal(Matrice p, float x);
+	float polyVal(RowVectorXf p, float x);
 	void meanSquare(float frame);
 	QPainterPath path(float frame){
 		QPainterPath p;

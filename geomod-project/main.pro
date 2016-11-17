@@ -22,7 +22,9 @@ SOURCES += \
     curve2DSquare.cpp \
     Matrice.cpp \
     curve2DAitkenChordal.cpp \
-    curve2DAitkenCentripetal.cpp
+    curve2DAitkenCentripetal.cpp \
+    curve2DWheel.cpp \
+    curve2DCircle.cpp
 
 # add your header files here
 HEADERS += \
@@ -52,7 +54,9 @@ HEADERS += \
     curve2DSquare.h \
     Matrice.h \
     curve2DAitkenChordal.h \
-    curve2DAitkenCentripetal.h 
+    curve2DAitkenCentripetal.h \
+    curve2DWheel.h \
+    curve2DCircle.h
 
 TEMPLATE = app
 

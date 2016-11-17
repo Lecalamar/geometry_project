@@ -8,6 +8,8 @@
 #include "curve2DAitken.h"
 #include "curve2DHermite1.h"
 #include "curve2DHermiteClosed.h"
+#include "curve2DWheel.h"
+#include "curve2DCircle.h"
 #include "curve2DLagrange.h"
 #include "curve2DSquare.h"
 #include "curve2DAitkenChordal.h"
@@ -31,6 +33,8 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DAitkenCentripetalConstructor());
   addCurveBuilder(new Curve2DHermite1Constructor());
   addCurveBuilder(new Curve2DHermiteClosedConstructor());
+  addCurveBuilder(new Curve2DWheelConstructor());
+  addCurveBuilder(new Curve2DCircleConstructor());
   addCurveBuilder(new Curve2DLagrangeConstructor());
   addCurveBuilder(new Curve2DSquareConstructor());
 

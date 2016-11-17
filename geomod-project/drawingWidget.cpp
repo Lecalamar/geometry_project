@@ -131,13 +131,16 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
 	}
 	break;
       case Scene::EDIT_DEL_PT:
-	deleteSelectedPoint();
+	  deleteSelectedPoint();
 	break;
-      case Scene::EDIT_DEL_CURVE:
+      case Scene::EDIT_DEL_CURVE: /*DELETE SELECTED CURVE*/
 	deleteCurve();
 	break;
-      case Scene::EDIT_DEL_ALL: /*DELETE ALL POINTS*/
-	deleteAllPoints();
+      case Scene::EDIT_MOVE_CURVE: /*MOVE CURVE*/
+	cc = _points[sce->selectedCurve()][sce->selectedPoint()];
+	if(!(items(event->pos()).contains(cc))) {
+	  moveCurve(pos.x(),pos.y());
+	}
 	break;
       default: break;
       }
@@ -316,12 +319,19 @@ void DrawingWidget::deleteCurve() {
 }
 
 
-/*DELETE ALL POINTS*/
-void DrawingWidget::deleteAllPoints() { 
+/*MOVE CURVE*/
+void DrawingWidget::moveCurve(float x, float y) { 
   /*  Scene *sce = Scene::get();
-  sce->clean();
-  selectionChanged();
-  */
+  int curveInd = sce->selectedCurve();
+  int ptInd = sce->selectedPoint();
+
+  if(curveInd<0 || ptInd<0) return;
+
+  Curve2D *curve = sce->getCurve(curveInd);
+  for (unsigned int i = 0; i < curve->nbPts(); i++){
+    curve->set(i,x,y);
+  }
+  selectionChanged();*/
 }
 
 

@@ -2,7 +2,6 @@
 #define CURVE_2D_WHEEL_H
 #define RESOLUTION_W 100
 #include "curve2D.h"
-#include <iostream>
 #include <vector>
 #include <cmath>
 using namespace std;

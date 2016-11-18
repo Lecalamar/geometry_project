@@ -14,6 +14,7 @@
 #include "curve2DSquare.h"
 #include "curve2DAitkenChordal.h"
 #include "curve2DAitkenCentripetal.h"
+#include "curve2DGear.h"
 
 #include "curve1DLinear.h"
 #include "curve1DStep.h"
@@ -37,6 +38,7 @@ void Scene::initCurveBuilders() {
   addCurveBuilder(new Curve2DCircleConstructor());
   addCurveBuilder(new Curve2DLagrangeConstructor());
   addCurveBuilder(new Curve2DSquareConstructor());
+  addCurveBuilder(new Curve2DGearConstructor());
 
 }
 

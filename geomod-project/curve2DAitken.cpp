@@ -9,9 +9,7 @@ Vector2f Curve2DAitken::Aitken(int k,int i,float t, float frame, float *param){
     P = evalAnimPt(get(i),frame);
   }else{
     for(int j = 0; j < 2; j++){
-      //      float ti = (float)i/(nbPts()-1);
       float ti = param[i];
-      //      float tik = (float)(i+k)/(nbPts()-1);
       float tik = param[i+k];
       P[j] = (Aitken(k-1,i,t,frame, param)[j]*(tik-t)+Aitken(k-1,i+1,t,frame, param)[j]*(t-ti))/(tik-ti);
     }

@@ -8,6 +8,6 @@ void Curve2DAitkenCentripetal::evalAitkenCentripetal(float frame){
   int L = CentripetalTab(frame, param, nbPts(), this);
   ParamTab(param, L, nbPts()); /* Creates centripetal parameter array */
   for (int t = 1; t < RESOLUTION_A; t++){
-    tab[t] = Aitken(nbPts()-1, 0, (float)t/RESOLUTION_A, frame, param);
+    tab[t] = Aitken(nbPts()-1, 0, (float)t/(RESOLUTION_A-1), frame, param);
   }
 }

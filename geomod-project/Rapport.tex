@@ -30,7 +30,7 @@ We used Github. Manuel worked on parameterizations of 2D curves (Aiken Centripet
 \subsubsection*{Bezier-Aitken}
 These both curves are coded from the same way. A recursive function on the contrrol points is called. We store points in a static tab and we linked these points after. It is also used for \textit{Hermite1} and \textit{Hermiteclosed}. For \textit{Aitken} we use a uniform parameterization. 
 \begin{figure}[H]
-   \includegraphics[scale = 0.5]{Pictures/bezier-aitken.png}
+   \includegraphics[scale = 0.3]{Pictures/bezier-aitken.png}
 \end{figure}
 \subsubsection*{Hermite1-Hermite closed}
 These curves are made with some Hermite cubic splines, based on P1, P2 and their tangent. That allows to have $C^1$ closed curves. The difficulty is to impose good direction, weight and sense for tangents.\\ 
@@ -45,7 +45,10 @@ The general formula is :
 \end{equation}
 We adapt it for the first and the last point. Moreover $\dfrac{Y_{i+1} - Y_{i}}{X_{i+1} - X_{i}}$ is bounded.\\
 l and m are equal to 1 or -1 according to tests of the form $X_{i+1} - X_{i}$, that changes the sense of the curve.\\
-$L_1$ and $L_2$ are the weight of derivatives, they are a projection. Actually this is a weighted average. \\%from nico to nico : scheme
+$L_1$ and $L_2$ are the weight of derivatives, they are a projection. Actually this is a weighted average. \\
+\begin{figure}[H]
+   \includegraphics[scale = 0.5]{Pictures/rapport2.png}
+\end{figure}
 
 \begin{figure}[H]
    \includegraphics[scale = 0.5]{Pictures/hermite.png}
@@ -54,11 +57,14 @@ $L_1$ and $L_2$ are the weight of derivatives, they are a projection. Actually t
 It is not really curves. The goal here is to play with the variable \textit{frame}. We are midway between cartoon and CAD.\\
 In both cases \textit{frame} is traduced as rotation speed. \\
 For \textit{Wheel} we draw two circles. We use the points of the little circle in scrolling the array according to \textit{frame}. To draw a radius we link a point of the array at the size(array)/2 point. In playing with that and modulo we can draw a rolling wheel.
-For gear we implicitely use a rotation matrix. We have three angles (see scheme) : alpha, to draw the gear, beta, to make rolling the gear, depending on frame and an angle depending on the mouse position (it is for follow the mouse and engage another gear). These three angles are added. \\
-Actually there is a repetition of 4 points, at every rotation we choose to add or substract at the radius the half-size of a teeth. Besides, the radius is computed to have an whole number of teeth.\\% scheme of angles
+For gear we implicitely use a rotation matrix. We have three angles (see scheme) : $\alpha$, to draw the gear, $\beta$, to make rolling the gear, depending on frame and an angle depending on the mouse position (it is for follow the mouse and engage another gear, the absolute value of this angle is $2\ arccos(d(\dfrac{mouse,center}{2 R}))$These three angles are added. $\beta$ is computed such that the angular speed of whatever gear be the same ($\beta$ is inversely proportional to the radius).\\ )
+Actually there is a repetition of 4 points, at every rotation we choose to add or substract at the radius the half-size of a teeth. Besides, the radius is computed to have an whole number of teeth.\\
+\begin{figure}[H]
+   \includegraphics[scale = 0.5]{Pictures/rapport1.png}
+\end{figure}
 So the user can drow a gear in clicking one or two times to chose the sense of rotation (an odd number for clockwise, otherwise counter-clockwise) then right-click for the radius (in fact almost the radius as above explained).
 \begin{figure}[H]
-   \includegraphics[scale = 0.5]{Pictures/gear-wheel.png}
+   \includegraphics[scale = 0.3]{Pictures/gear-wheel.png}
 \end{figure}
 
 \subsection*{others} %for example DelCurve

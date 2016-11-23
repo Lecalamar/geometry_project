@@ -15,7 +15,7 @@ vector<float> Curve2DHermite1::H(float t){
   tab.push_back(H1);
   tab.push_back(H2);
   tab.push_back(H3);
-  return tab;
+  return tab; // we return a vector which contains the Hermite polynoms at parameter t
 }
 
 float Curve2DHermite1::distance(Vector2f P1, Vector2f P2){
@@ -23,7 +23,7 @@ float Curve2DHermite1::distance(Vector2f P1, Vector2f P2){
 }
 
 float Curve2DHermite1::projection(Vector2f P1, Vector2f P2, Vector2f P3){
-  return abs((P2[0]-P1[0])*(P3[0]-P1[0])+(P2[1]-P1[1])*(P3[1]-P1[1]))/distance(P1,P3);
+  return abs((P2[0]-P1[0])*(P3[0]-P1[0])+(P2[1]-P1[1])*(P3[1]-P1[1]))/distance(P1,P3); //we compute a scalar product and we norm them, it is for the weight of tangents
 }
 
 float Curve2DHermite1::tangent(Vector2f P1, Vector2f P2){

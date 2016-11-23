@@ -36,7 +36,8 @@ int CentripetalTab(float frame, float *param, unsigned int n, Curve2D *c) {
 void ParamTab(float *param, int L, unsigned int n) {
   /*t_0 = a = 0*/
   param[0] = 0;
-  for (unsigned int i = 1; i < n; i++){
+  param[n-1] = 1; 
+  for (unsigned int i = 1; i < n-1; i++){
     param[i] = param[i-1] + param[i]/L;
   }
 }

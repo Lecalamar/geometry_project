@@ -136,6 +136,9 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
       case Scene::EDIT_DEL_CURVE: /*DELETE SELECTED CURVE*/
 	deleteCurve();
 	break;
+      case Scene::EDIT_DEL_ALL: /*DELETE ALL CURVES*/
+	deleteAllCurves();
+	break;
       case Scene::EDIT_MOVE_CURVE: /*MOVE CURVE*/
 	cc = _points[sce->selectedCurve()][sce->selectedPoint()];
 	if(!(items(event->pos()).contains(cc))) {
@@ -318,6 +321,15 @@ void DrawingWidget::deleteCurve() {
   selectionChanged();
 }
 
+/*DELETE ALL CURVES*/
+void DrawingWidget::deleteAllCurves() {
+ Scene *sce = Scene::get();
+  int curveIndMax = sce->-curves.size();
+  for (int curveInd = 0; curveInd < curveIndMax, curveInd++) {
+    sce->delCurve(curveInd);
+  }
+  selectionChanged
+}
 
 /*MOVE CURVE*/
 void DrawingWidget::moveCurve(float x, float y) { 
@@ -333,7 +345,6 @@ void DrawingWidget::moveCurve(float x, float y) {
   }
   selectionChanged();*/
 }
-
 
 void DrawingWidget::frameChanged() {
   Scene *sce = Scene::get();

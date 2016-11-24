@@ -46,6 +46,7 @@ class DrawingWidget : public QGraphicsView {
   void addPointAfterSelectedPoint(float x,float y);
   void deleteSelectedPoint();
   void deleteCurve(); /*DELETE SELECTED CURVE*/
+  void deleteAllCurves(); /*DELETE ALL CURVES*/
   void moveCurve(float x, float y); /*MOVE CURVE*/
   
   std::vector<std::vector<ControlPoint2D *> > _points;

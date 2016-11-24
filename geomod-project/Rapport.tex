@@ -18,7 +18,6 @@
 \begin{document}
 
 \maketitle
-\section*{Summary and presentation}
 \begin{figure}[H]
    \includegraphics[scale = 0.5]{Pictures/narutovoiture.png}
 \end{figure}
@@ -26,6 +25,9 @@
 We used Github. Manuel worked on parameterizations of 2D curves (Aiken Centripetal/Chordal), 1D curves and delCurve. Mohamed made 1D curves (sinus) and 2D curves (Lagrange/smooth) and Nicolas did essentially 2D curves (Hermite1-closed, Bezier and Gear, Wheel, even if there are not curves). 
 \section*{Curves}
 \subsection*{Curves 1-D}
+\subsubsection*{Step curve}
+
+This is a very basic curve to familiarize ourselves with the concept of 1-D curves: the Path function, draws in the animation Widget the way our points should move during an animation, while the EvalAt function returns the value of the points a different moments in time following the Path.
 \subsubsection*{Sinusoidal}
 The idea comes from the fact that the function $t \longmapsto t+\sin t$ has an interessing form as shown
 on the following figure. It will help us to do some kinds of movement.
@@ -42,11 +44,35 @@ And after looking for it, we find the function defined by :
 Where $\Delta$ is the amplitude and $\Omega$ is the pulsation in terms of signal.\\
 This function is a sinusoidal function and we can also remark that $f(t_A)=x_A$ and $f(t_B)=x_B$.
 \subsection*{Curves 2-D}
-\subsubsection*{Bezier-Aitken}
-These both curves are coded from the same way. A recursive function on the contrrol points is called. We store points in a static tab and we linked these points after. It is also used for \textit{Hermite1} and \textit{Hermiteclosed}. For \textit{Aitken} we use a uniform parameterization. 
+\subsubsection*{Aitken}
+ A recursive function on the control points is called. We store points in a static tab and we linked these points after. It is also used for \textit{Hermite1} and \textit{Hermiteclosed}. For \textit{Aitken} we use a uniform parameterization. 
 \begin{figure}[H]
    \includegraphics[scale = 0.3]{Pictures/bezier-aitken.png}
 \end{figure}
+\subsubsection*{Bezier}
+\begin{equation*}
+    x(t) = \sum_{i=0}^n\textbf{b}_i B_i^n(t)
+\end{equation*}
+
+where the $\textbf{b}_{i}$ are the control points and the $B_{i}^{n}$ are the Bernstein polynoms defined as follows:
+
+\begin{equation*}
+    \forall t \in \big[0 \,,1\big] \quad B_i^n(t)= \binom{n}{i}  (1-t)^{n-i} t^i
+\end{equation*}
+
+A change of variable $t = \frac{u-a}{b-a}$ might be needed if our parameters are in $\big[a \,,b\big]$ instead of $\big[0 \,,1\big]$. \\
+For a given $t$, we can compute the value of the curve using the De Casteljau algorithm based on the following theorem:
+
+\begin{equation*}
+     Let \quad
+\Bigg\{  \begin{tabular}{c}
+    b_i^0 = \textbf{b}_i \quad \forall i \in[\![0;n]\!] \\
+  b_i^k = (1-t)b_i^{k-1} + t\,b_{i+1}^{k-1} \quad \forall k \in [\![1,n]\!], \quad \forall i \in [\![0,n-k]\!] 
+        \end{tabular} \qquad
+        Then \quad x(t) = b_0^n
+\end{equation*}
+
+As said previously, the algorithm was implemented recursively.
 \subsubsection*{Hermite1-Hermite closed}
 These curves are made with some Hermite cubic splines, based on P1, P2 and their tangent. That allows to have $C^1$ closed curves. The difficulty is to impose good direction, weight and sense for tangents.\\ 
 The general formula is :
@@ -151,9 +177,9 @@ Let $\displaystyle A(x) = \sum \limits_{i=0}^{p}a_ix^i$ be the polynomial curve 
  	\end{pmatrix} \\
  	&\iff Au = y + \epsilon
  \end{align*}
- Now, we want to minimize the euclidean norm of errors $\epsilon$ that is to say find $u^*$ such that
+ Now, we want to minimize the euclidian norm of errors $\epsilon$.
  \[  
- 	u^* = \min_{u} \Vert \epsilon \Vert^2 = \min_{u} \Vert Au - y \Vert^2
+ 	\Vert \epsilon \Vert^2 = \Vert Au - y \Vert^2
  \]
  We also need an important result which is : 
  \[ \,(^tAA)u = \,^tAy \iff u =  (^tAA)^{-1}\,(^tAy)\] 
@@ -164,6 +190,15 @@ Let $\displaystyle A(x) = \sum \limits_{i=0}^{p}a_ix^i$ be the polynomial curve 
    \includegraphics[scale = 0.4]{Pictures/sq1.png}
 \end{figure}
 \subsection*{Others} %for example DelCurve
+ \begin{itemize}
+ \item An extra button was added to the tools Widget: "Del Curve". In Edit mode, it deletes the curve of the selected Point. It was implemented by tracing the code of the other Edit buttons in the code architecture. There are two main steps: adding the button in the tool Widget and binding it to an action when the mouse is clicked, and modifying the scene and the drawing Widget in such a way than when this button is used, a whole curve will be deleted (a function to delete a selected curve already existed).
+ \item Another button 'Del All' was made. As it turned out, this utility was required for the File->New option of the Main Window. That is why, even though the 'Del All' button was implemented, the widget wasn't added to the tools (the code exists still though, there was no time to remove it). Then, the function of the Drawing Widget that deleted all curves was copied into the \textit{clearAll} function of Main Window. The function used a private method of Drawing Widget, so we turned Main Window into a friend of Drawing Widget
+   \end{itemize}
 \section*{Prospects}
-We had a lot of ideas but some of them have not been made. It was because of time, or because we fear to modify some files. We do not master the architecture of the whole project. For example matstering scene.h would allowed many things, like to save. 
+We had a lot of ideas but some of them have not been made. It was because of time, or because we fear to modify some files. We do not master the architecture of the whole project. For example matstering scene.h would allowed many things, like to save.
+Other ideas that were started but never finished were the following:
+\begin{itemize}
+    \item A button Move Curve. \\The steps to follow where the same as Del Curve, but there was no pre-existing function like before, and we couldn't make it work. Same for a function that would permit to resize or rotate a curve.
+    \item Buttons in the Create Widget that let you choose a type of parametrization, if it applies to the selected curve. \\ Instead of changing entirely the way Curves 2D worked, there was maybe a way to select 'hidden curves' (curves that were implemented but that were not added to the create Widget) when clicking these parametrization buttons. The same principle could be used to make already implemented curves that translated or rotated (by calling 'hidden' curves that depended on the \textit{frame}).
+\end{itemize}
 \end{document}

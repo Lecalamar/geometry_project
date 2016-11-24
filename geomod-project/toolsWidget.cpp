@@ -98,17 +98,20 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   _addPtAfter = new QPushButton("Add ->");
   _delPt = new QPushButton("Del");
   _delCurve = new QPushButton("Del Curve"); /*DELETE SELECTED CURVE*/
+  _delAll = new QPushButton("Del All"); /*DELETE ALL CURVES*/
   _mvCurve = new QPushButton("Move Curve"); /*MOVE CURVE*/
   _addPtBefore->setAutoFillBackground(true);
   _addPtAfter->setAutoFillBackground(true);
   _delPt->setAutoFillBackground(true);
   _delCurve->setAutoFillBackground(true); /*DELETE SELECTED CURVE*/
+  _delAll->setAutoFillBackground(true); /*DELETE ALL CURVES*/
   _mvCurve->setAutoFillBackground(true); /*MOVE CURVE*/
   hl = new QHBoxLayout();
   hl->addWidget(label);
   hl->addWidget(_addPtBefore);
   hl->addWidget(_addPtAfter);
   hl->addWidget(_delPt);
+  // hl->addWidget(_delAll); /*DELETE ALL CURVES*/
   //  hl->addWidget(_mvCurve); /*MOVE CURVE*/
   hl->addWidget(_delCurve); /*DELETE SELECTED CURVE*/
   vl = new QVBoxLayout();
@@ -239,6 +242,7 @@ ToolsWidget::ToolsWidget(MainWindow *mainWindow,QWidget *parent)
   connect(_addPtAfter,SIGNAL(clicked()),this,SLOT(addPtAfterClicked()));
   connect(_delPt,SIGNAL(clicked()),this,SLOT(delPtClicked()));
   connect(_delCurve,SIGNAL(clicked()),this,SLOT(delCurveClicked())); /*DELETES SELECTED CURVE*/
+  connect(_delAll,SIGNAL(clicked()),this,SLOT(delAllCurves())); /*DELETE ALL CURVES*/
   connect(_mvCurve,SIGNAL(clicked()),this,SLOT(moveCurveClicked())); /*MOVE CURVE*/
   connect(_width,SIGNAL(valueChanged(int)),this,SLOT(sizeChanged()));
   connect(_height,SIGNAL(valueChanged(int)),this,SLOT(sizeChanged()));
@@ -409,6 +413,7 @@ void ToolsWidget::addPtBeforeClicked() {
   setButtonColor(_delPt,_UNSELECTED_COLOR);
   setButtonColor(_mvCurve, _UNSELECTED_COLOR); /*MOVE CURVE*/
   setButtonColor(_delCurve, _UNSELECTED_COLOR); /*DELETE CURVE*/
+  setButtonColor(_delAll, _UNSELECTED_COLOR); /*DELETE ALL CURVES*/
   _mainWindow->selectionChanged();
 }
 
@@ -422,6 +427,7 @@ void ToolsWidget::addPtAfterClicked() {
   setButtonColor(_delPt,_UNSELECTED_COLOR);
   setButtonColor(_mvCurve, _UNSELECTED_COLOR); /*MOVE CURVE*/
   setButtonColor(_delCurve, _UNSELECTED_COLOR); /*DELETE CURVE*/
+  setButtonColor(_delAll, _UNSELECTED_COLOR); /*DELETE ALL CURVES*/
   _mainWindow->selectionChanged();
 }
 
@@ -435,6 +441,7 @@ void ToolsWidget::delPtClicked() {
   setButtonColor(_delPt,_SELECTED_COLOR);
   setButtonColor(_mvCurve, _UNSELECTED_COLOR); /*MOVE CURVE*/
   setButtonColor(_delCurve, _UNSELECTED_COLOR); /*DELETE CURVE*/
+  setButtonColor(_delAll, _UNSELECTED_COLOR); /*DELETE ALL CURVES*/
   _mainWindow->selectionChanged();
 }
 
@@ -448,6 +455,21 @@ void ToolsWidget::moveCurveClicked() { /*MOVE CURVE*/
   setButtonColor(_delPt,_UNSELECTED_COLOR);
   setButtonColor(_mvCurve, _SELECTED_COLOR);
   setButtonColor(_delCurve, _UNSELECTED_COLOR); /*DEL_CURVE*/
+  setButtonColor(_delAll, _UNSELECTED_COLOR); /*DELETE ALL CURVES*/
+  _mainWindow->selectionChanged();
+}
+
+void ToolsWidget::delAllCurves() { /*DELETE ALL CURVES*/
+  Scene *sce = Scene::get();
+   if(sce->editMode()==Scene::EDIT_DEL_ALL)
+    return;
+  sce->setEditMode(Scene::EDIT_DEL_ALL);
+  setButtonColor(_addPtBefore,_UNSELECTED_COLOR);
+  setButtonColor(_addPtAfter,_UNSELECTED_COLOR);
+  setButtonColor(_delPt,_UNSELECTED_COLOR);
+  setButtonColor(_mvCurve, _UNSELECTED_COLOR); /*MOVE CURVE*/
+  setButtonColor(_delCurve, _UNSELECTED_COLOR); /*DELETE CURVE*/
+  setButtonColor(_delAll, _SELECTED_COLOR); /*DELETE ALL CURVES*/
   _mainWindow->selectionChanged();
 }
 
@@ -459,8 +481,9 @@ void ToolsWidget::delCurveClicked() { /*MOVE CURVE*/
   setButtonColor(_addPtBefore,_UNSELECTED_COLOR);
   setButtonColor(_addPtAfter,_UNSELECTED_COLOR);
   setButtonColor(_delPt,_UNSELECTED_COLOR);
-  setButtonColor(_mvCurve, _UNSELECTED_COLOR); /*DEL_AL*/
-  setButtonColor(_delCurve, _SELECTED_COLOR); /*DEL_CURVE*/
+  setButtonColor(_mvCurve, _UNSELECTED_COLOR); /*MOVE CURVE*/
+  setButtonColor(_delCurve, _SELECTED_COLOR); /*DELETE CURVE*/
+  setButtonColor(_delAll, _UNSELECTED_COLOR); /*DELETE ALL CURVES*/
   _mainWindow->selectionChanged();
 }
 
@@ -661,6 +684,7 @@ void ToolsWidget::initTools() {
   setButtonColor(_delPt,_UNSELECTED_COLOR);
   setButtonColor(_mvCurve,_UNSELECTED_COLOR); /*MOVE CURVE*/
   setButtonColor(_delCurve,_UNSELECTED_COLOR); /*DELETE SELECTED CURVE*/
+  setButtonColor(_delAll,_UNSELECTED_COLOR); /*DELETE ALL CURVES*/
 
   switch(sce->editMode()) {
   case Scene::EDIT_ADD_AFTER: 
@@ -671,6 +695,9 @@ void ToolsWidget::initTools() {
     break;
   case Scene::EDIT_MOVE_CURVE: /*MOVE CURVE*/ 
     setButtonColor(_mvCurve,_SELECTED_COLOR);
+    break;
+  case Scene::EDIT_DEL_ALL: /*DELETE ALL CURVES*/ 
+    setButtonColor(_delAll,_SELECTED_COLOR);
     break;
   case Scene::EDIT_DEL_CURVE: /*DELETE SELECTED CURVE*/ 
     setButtonColor(_delCurve,_SELECTED_COLOR);

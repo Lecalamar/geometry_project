@@ -286,7 +286,13 @@ bool MainWindow::maybeSave() {
 }
 
 void MainWindow::clearAll() {
-  cout << __FILE__ << " - " << __FUNCTION__ << ": TODO!" << endl;
+  Scene *sce = Scene::get();
+  int curveIndMax = sce->nbCurves();
+  for (int curveInd = 0; curveInd < curveIndMax; curveInd++) {
+    sce->setSelectedCurve(0);
+    _drawingWidget->deleteSelectedCurve();
+  }
+  selectionChanged();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {

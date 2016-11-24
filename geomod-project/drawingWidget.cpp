@@ -326,7 +326,8 @@ void DrawingWidget::deleteAllCurves() {
  Scene *sce = Scene::get();
   int curveIndMax = sce->nbCurves();
   for (int curveInd = 0; curveInd < curveIndMax; curveInd++) {
-    sce->delCurve(curveInd);
+    sce->setSelectedCurve(0);
+    deleteSelectedCurve();
   }
   selectionChanged();
 }

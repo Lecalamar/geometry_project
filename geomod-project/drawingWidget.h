@@ -11,6 +11,8 @@ class ControlPoint2D;
 class Curve2DDrawer;
 
 class DrawingWidget : public QGraphicsView {
+  friend class MainWindow; // for clearAll
+  
   Q_OBJECT
 
     public:

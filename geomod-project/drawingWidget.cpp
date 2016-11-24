@@ -324,11 +324,11 @@ void DrawingWidget::deleteCurve() {
 /*DELETE ALL CURVES*/
 void DrawingWidget::deleteAllCurves() {
  Scene *sce = Scene::get();
-  int curveIndMax = sce->-curves.size();
-  for (int curveInd = 0; curveInd < curveIndMax, curveInd++) {
+  int curveIndMax = sce->nbCurves();
+  for (int curveInd = 0; curveInd < curveIndMax; curveInd++) {
     sce->delCurve(curveInd);
   }
-  selectionChanged
+  selectionChanged();
 }
 
 /*MOVE CURVE*/
